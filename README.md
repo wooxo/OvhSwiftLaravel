@@ -29,14 +29,6 @@ Add provider in config.app
 );
 ```
 
-Add alias in config.app
-```bash
-'aliases' = array(
-    [...],
-    'OvhSwiftLaravel' => 'Lflaszlo\OvhSwiftLaravel\Facades\OvhSwiftLaravel'
-);
-```
-
 Usage
 ------------
 
