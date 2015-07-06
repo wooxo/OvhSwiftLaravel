@@ -13,6 +13,6 @@ class OvhSwiftLaravelFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'ovhswiftlaravel';
+        return 'OvhSwiftLaravel';
     }
 }
