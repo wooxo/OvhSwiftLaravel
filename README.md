@@ -1,33 +1,66 @@
 # OVHSwiftLaravel
 
-WARNING : Development in progress, don't use at this time.
-
-Library to use OVH PCI Object Storage API. From work on : https://github.com/drauta/runabove-laravel.
+Library to use OVH PCI Object Storage API with Laravel
+Based on work from : https://github.com/drauta/runabove-laravel.
 
 Installation
 ------------
 
 Install using composer:
-
 ```bash
-composer require lflaszlo/ovh-swift-laravel "dev-master"
+composer require lflaszlo/ovh-swift-laravel "0.1.*"
 ```
 
-add to config/app.php
-
+Publish config and complete informations (use OVH API to get Credentials)
 ```bash
-'Myjeux\OVH\SwiftServiceProvider',
+php artisan config:publish lflaszlo/ovh-swift-laravel
 ```
 
-Add the following to the config/services.php
+Add provider in config.app
 ```bash
-'ovh' => [
-	'username' => 'yourUsername',
-	'password' => 'yourPassword',	  
-	'tenantId' => 'yourTeenantId',		
-	'container'=> 'yourContainer',
-],
+'providers' = array(
+    [...],
+    'Lflaszlo\OvhSwiftLaravel\OvhSwiftLaravelServiceProvider'
+);
 ```
-Laravel
--------
-This package provides an integration with OVH object container. 
+
+Add alias in config.app
+```bash
+'aliases' = array(
+    [...],
+    'OvhSwiftLaravel' => 'Lflaszlo\OvhSwiftLaravel\Facades\OvhSwiftLaravel'
+);
+```
+
+Usage
+------------
+
+Get file list
+```bash
+$client = new OvhSwiftLaravel();
+$client->fileList();
+```
+
+Upload a file
+```bash
+$client = new OvhSwiftLaravel();
+$client->filePut('path/to/the/file');
+```
+
+Get content of an uploaded file
+```bash
+$client = new OvhSwiftLaravel();
+$client->fileGet('hello_world.txt');
+```
+
+Delete an uploaded file
+```bash
+$client = new OvhSwiftLaravel();
+$client->fileDelete('hello_world.txt');
+```
+
+Check if a file exists
+```bash
+$client = new OvhSwiftLaravel();
+$client->fileExists('hello_world.txt');
+```
