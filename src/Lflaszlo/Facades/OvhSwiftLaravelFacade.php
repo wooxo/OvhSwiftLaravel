@@ -1,20 +1,18 @@
- <?php
-     namespace Lflaszlo\OvhSwiftLaravel\Facades;
-     use Illuminate\Support\Facades\Facade;
+<?php
 
-     /**
-      * Facade of  OvhSwiftLaravel
-      *
-      * @package Lflaszlo\OvhSwiftLaravel\Facades
-      */
-     class OvhSwiftLaravelFacade extends Facade {
+namespace Lflaszlo\OvhSwiftLaravel\Facades;
 
-         /**
-          * Provide the name of the component
-          * @return string
-          */
-         protected static function getFacadeAccessor()
-         {
-             return 'ovhswiftlaravel';
-         }
-     }
+use Illuminate\Support\Facades\Facade;
+
+class OvhSwiftLaravelFacade extends Facade
+{
+    /**
+     * Get the registered name of the component
+     * @return string
+     * @codeCoverageIgnore
+     */
+    protected static function getFacadeAccessor()
+    {
+        return 'ovhswiftlaravel';
+    }
+}
