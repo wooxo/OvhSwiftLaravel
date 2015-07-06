@@ -15,6 +15,6 @@
           */
          protected static function getFacadeAccessor()
          {
-             return 'ovh-swift-laravel';
+             return 'ovhswiftlaravel';
          }
      }
