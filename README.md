@@ -10,7 +10,7 @@ Installation
 Install using composer:
 
 ```bash
-composer require myjeux/OVHSwiftLaravel "dev-master"
+composer require lflaszlo/ovh-swift-laravel "dev-master"
 ```
 
 add to config/app.php
