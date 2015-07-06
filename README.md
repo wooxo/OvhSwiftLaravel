@@ -1,5 +1,6 @@
 # OvhSwiftLaravel
 
+[![Build Status](https://travis-ci.org/lflaszlo/OvhSwiftLaravel.svg?branch=master)](https://travis-ci.org/lflaszlo/OvhSwiftLaravel)
 [![Latest Stable Version](https://poser.pugx.org/lflaszlo/ovh-swift-laravel/v/stable.png)](https://packagist.org/packages/lflaszlo/ovh-swift-laravel) [![Total Downloads](https://poser.pugx.org/lflaszlo/ovh-swift-laravel/downloads.png)](https://packagist.org/packages/lflaszlo/ovh-swift-laravel)
 
 
