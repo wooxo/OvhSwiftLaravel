@@ -7,7 +7,7 @@
       *
       * @package Lflaszlo\OvhSwiftLaravel\Facades
       */
-     class OvhSwiftLaravel extends Facade {
+     class OvhSwiftLaravelFacade extends Facade {
 
          /**
           * Provide the name of the component
