@@ -13,7 +13,7 @@ Installation
 
 Install using composer:
 ```bash
-composer require lflaszlo/ovh-swift-laravel "0.1.*"
+composer require lflaszlo/ovh-swift-laravel "~0.1"
 ```
 
 Publish config and complete informations (use OVH API to get Credentials)
