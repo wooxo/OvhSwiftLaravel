@@ -20,6 +20,30 @@ class OvhSwiftLaravelServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('lflaszlo/ovh-swift-laravel');
+        $this->app->booting(function()
+        {
+            $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+            $loader->alias('OvhSwiftLaravel', 'Lflaszlo\OvhSwiftLaravel\OvhSwiftLaravel');
+        });
     }
+
+	/**
+	 * Register the service provider.
+	 *
+	 * @return void
+	 */
+	public function register()
+	{
+	}
+
+	/**
+	 * Get the services provided by the provider.
+	 *
+	 * @return array
+	 */
+	public function provides()
+	{
+		return array();
+	}
 
 }
