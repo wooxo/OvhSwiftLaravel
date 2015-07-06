@@ -1,6 +1,7 @@
 <?php namespace Lflaszlo\OvhSwiftLaravel;
-
+use Filesystem;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Config;
 
 class OvhSwiftLaravelServiceProvider extends ServiceProvider {
 
@@ -19,7 +20,7 @@ class OvhSwiftLaravelServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('lflaszlo/ovh-swift-laravel');
-	}
+    }
 
 	/**
 	 * Register the service provider.
@@ -28,7 +29,7 @@ class OvhSwiftLaravelServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		//
+
 	}
 
 	/**
