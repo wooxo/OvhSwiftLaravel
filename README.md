@@ -1,4 +1,7 @@
-# OVHSwiftLaravel
+# OvhSwiftLaravel
+
+[![Latest Stable Version](https://poser.pugx.org/lflaszlo/ovh-swift-laravel/v/stable.png)](https://packagist.org/packages/lflaszlo/ovh-swift-laravel) [![Total Downloads](https://poser.pugx.org/lflaszlo/ovh-swift-laravel/downloads.png)](https://packagist.org/packages/lflaszlo/ovh-swift-laravel)
+
 
 Library to use OVH PCI Object Storage API with Laravel
 Based on work from : https://github.com/drauta/runabove-laravel.
