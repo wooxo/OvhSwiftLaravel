@@ -1,5 +1,8 @@
 # OVHSwiftLaravel
-Service provider to use OVH PCI Object Storage API. From work on : https://github.com/drauta/runabove-laravel.
+
+WARNING : Development in progress, don't use at this time.
+
+Library to use OVH PCI Object Storage API. From work on : https://github.com/drauta/runabove-laravel.
 
 Installation
 ------------
