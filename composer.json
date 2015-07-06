@@ -1,7 +1,7 @@
 {
     "name": "lflaszlo/ovh-swift-laravel",
     "type": "library",
-    "description": "Library to use OVH PCI Object Storage API with Laravel.",
+    "description": "Library to use OVH PCI Object Storage API with Laravel 4.2.",
     "authors": [
         {
             "name": "Louis-Frédéric LASZLO",
