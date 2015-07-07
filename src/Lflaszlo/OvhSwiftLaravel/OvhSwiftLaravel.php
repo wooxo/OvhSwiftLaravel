@@ -43,7 +43,7 @@ class OvhSwiftLaravel {
             'password' => Config::get('ovh-swift-laravel::config.password'),
             'tenantId' => Config::get('ovh-swift-laravel::config.tenantId'),
         ));
-        $this->service = $this->client->objectStoreService('swift', 'SBG1', 'publicURL');
+        $this->service = $this->client->objectStoreService('swift', Config::get('ovh-swift-laravel::config.region'), 'publicURL');
         $this->container = $this->service->getContainer(Config::get('ovh-swift-laravel::config.container'));
     }
 
