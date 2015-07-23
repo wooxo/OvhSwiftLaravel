@@ -47,15 +47,17 @@ class OvhSwiftLaravel {
         $this->container = $this->service->getContainer(Config::get('ovh-swift-laravel::config.container'));
     }
 
+
     /**
-     * Get the content of a file
+     * Get a file
      * @param $filename
-     * @return \Guzzle\Http\EntityBody
+     *
+     * @return \OpenCloud\ObjectStore\Resource\DataObject
      */
     public function fileGet($filename)
     {
         $object = $this->container->getObject($filename);
-        return $object->getContent();
+        return $object;
     }
 
     /**
