@@ -44,7 +44,7 @@ $client = new OvhSwiftLaravel();
 $client->filePut('path/to/the/file');
 ```
 
-Get content of an uploaded file
+Get an uploaded file
 ```bash
 $client = new OvhSwiftLaravel();
 $client->fileGet('hello_world.txt');
