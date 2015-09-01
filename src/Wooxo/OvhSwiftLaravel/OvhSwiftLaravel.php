@@ -1,5 +1,5 @@
 <?php
-namespace Lflaszlo\OvhSwiftLaravel;
+namespace Wooxo\OvhSwiftLaravel;
 use OpenCloud\OpenStack;
 use Guzzle\Http\Exception\BadResponseException;
 use Illuminate\Support\Facades\Config;
@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Config;
 /**
  * Library OvhSwiftLaravel
  *
- * @package Lflaszlo\OvhSwiftLaravel
+ * @package Wooxo\OvhSwiftLaravel
  */
 class OvhSwiftLaravel {
     /**

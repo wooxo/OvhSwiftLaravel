@@ -1,4 +1,4 @@
-<?php namespace Lflaszlo\OvhSwiftLaravel;
+<?php namespace Wooxo\OvhSwiftLaravel;
 use Filesystem;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Config;
