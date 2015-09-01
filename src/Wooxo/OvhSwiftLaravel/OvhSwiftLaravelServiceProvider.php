@@ -23,7 +23,7 @@ class OvhSwiftLaravelServiceProvider extends ServiceProvider {
         $this->app->booting(function()
         {
             $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-            $loader->alias('OvhSwiftLaravel', 'Lflaszlo\OvhSwiftLaravel\OvhSwiftLaravel');
+            $loader->alias('OvhSwiftLaravel', 'Wooxo\OvhSwiftLaravel\OvhSwiftLaravel');
         });
     }
 
