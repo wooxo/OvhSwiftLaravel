@@ -19,7 +19,7 @@ class OvhSwiftLaravelServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('lflaszlo/ovh-swift-laravel');
+		$this->package('wooxo/ovh-swift-laravel');
         $this->app->booting(function()
         {
             $loader = \Illuminate\Foundation\AliasLoader::getInstance();
