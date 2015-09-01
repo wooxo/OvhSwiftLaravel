@@ -1,16 +1,16 @@
 {
-    "name": "lflaszlo/ovh-swift-laravel",
+    "name": "wooxo/ovh-swift-laravel",
     "type": "library",
     "description": "Library to use OVH PCI Object Storage API with Laravel 4.2.",
     "authors": [
         {
-            "name": "Louis-Frédéric LASZLO",
-            "email": "louis.laszlo@gmail.com"
+            "name": "Wooxo SA",
+            "email": "dev@wooxo.fr"
         }
     ],
     "license": "MIT",
     "keywords": ["ovh", "laravel", "swift"],
-    "homepage": "https://github.com/lflaszlo/OvhSwiftLaravel",
+    "homepage": "https://github.com/wooxo/OvhSwiftLaravel",
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": "4.2.*",
@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Lflaszlo\\OvhSwiftLaravel\\": "src/"
+            "Wooxo\\OvhSwiftLaravel\\": "src/"
         }
     },
     "minimum-stability": "stable"
