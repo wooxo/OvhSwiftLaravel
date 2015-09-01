@@ -1,7 +1,7 @@
 # OvhSwiftLaravel
 
-[![Build Status](https://travis-ci.org/lflaszlo/OvhSwiftLaravel.svg?branch=master)](https://travis-ci.org/lflaszlo/OvhSwiftLaravel)
-[![Latest Stable Version](https://poser.pugx.org/lflaszlo/ovh-swift-laravel/v/stable.png)](https://packagist.org/packages/lflaszlo/ovh-swift-laravel) [![Total Downloads](https://poser.pugx.org/lflaszlo/ovh-swift-laravel/downloads.png)](https://packagist.org/packages/lflaszlo/ovh-swift-laravel)
+[![Build Status](https://travis-ci.org/wooxo/OvhSwiftLaravel.svg?branch=master)](https://travis-ci.org/wooxo/OvhSwiftLaravel)
+[![Latest Stable Version](https://poser.pugx.org/wooxo/ovh-swift-laravel/v/stable.png)](https://packagist.org/packages/wooxo/ovh-swift-laravel) [![Total Downloads](https://poser.pugx.org/wooxo/ovh-swift-laravel/downloads.png)](https://packagist.org/packages/wooxo/ovh-swift-laravel)
 
 It's a library for Laravel 4.2.
 
@@ -13,19 +13,19 @@ Installation
 
 Install using composer:
 ```bash
-composer require lflaszlo/ovh-swift-laravel "~0.1"
+composer require wooxo/ovh-swift-laravel "~0.1"
 ```
 
 Publish config and complete informations (use OVH API to get Credentials)
 ```bash
-php artisan config:publish lflaszlo/ovh-swift-laravel
+php artisan config:publish wooxo/ovh-swift-laravel
 ```
 
 Add provider in config.app
 ```bash
 'providers' = array(
     [...],
-    'Lflaszlo\OvhSwiftLaravel\OvhSwiftLaravelServiceProvider'
+    'Wooxo\OvhSwiftLaravel\OvhSwiftLaravelServiceProvider'
 );
 ```
 
