@@ -43,6 +43,18 @@ class OvhSwiftLaravel {
             'password' => Config::get('ovh-swift-laravel::config.password'),
             'tenantId' => Config::get('ovh-swift-laravel::config.tenantId'),
         ));
+        $cacheFile = storage_path() . '/.opencloud_token';
+        // If the cache file exists, try importing it into the client
+        if (file_exists($cacheFile)) {
+            $data = unserialize(file_get_contents($cacheFile));
+            $this->client->importCredentials($data);
+        }
+        $token = $this->client->getTokenObject();
+        // If no token exists, or the current token is expired, re-authenticate and save the new token to disk
+        if (!$token || ($token && $token->hasExpired())) {
+            $this->client->authenticate();
+            file_put_contents($cacheFile, serialize($this->client->exportCredentials()));
+        }
         $this->service = $this->client->objectStoreService('swift', Config::get('ovh-swift-laravel::config.region'), 'publicURL');
         $this->container = $this->service->getContainer(Config::get('ovh-swift-laravel::config.container'));
     }
