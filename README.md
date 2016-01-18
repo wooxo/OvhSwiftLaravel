@@ -5,6 +5,8 @@
 
 It's a library for Laravel 5.2.
 
+For Laravel 4.2, use 0.1.x tags.
+
 Library to use OVH PCI Object Storage API with Laravel
 Based on work from : https://github.com/drauta/runabove-laravel.
 
@@ -13,19 +15,19 @@ Installation
 
 Install using composer:
 ```bash
-composer require wooxo/ovh-swift-laravel "~0.1"
+composer require wooxo/ovh-swift-laravel "~1.0"
 ```
 
 Publish config and complete informations (use OVH API to get Credentials)
 ```bash
-php artisan config:publish wooxo/ovh-swift-laravel
+php artisan config:publish 
 ```
 
 Add provider in config.app
 ```bash
 'providers' = array(
     [...],
-    'Wooxo\OvhSwiftLaravel\OvhSwiftLaravelServiceProvider'
+    Wooxo\OvhSwiftLaravel\OvhSwiftLaravelServiceProvider::class
 );
 ```
 
