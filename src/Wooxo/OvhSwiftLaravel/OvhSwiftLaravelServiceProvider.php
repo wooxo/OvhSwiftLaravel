@@ -18,7 +18,6 @@ class OvhSwiftLaravelServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('wooxo/ovh-swift-laravel');
 		$configPath = __DIR__ . '/../../config/ovh-swift-laravel.php';
 		if (function_exists('config_path')) {
 			$publishPath = config_path('ovh-swift-laravel.php');
