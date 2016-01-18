@@ -1,7 +1,6 @@
 <?php namespace Wooxo\OvhSwiftLaravel;
 use Filesystem;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Config;
 
 class OvhSwiftLaravelServiceProvider extends ServiceProvider {
 
@@ -20,11 +19,13 @@ class OvhSwiftLaravelServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('wooxo/ovh-swift-laravel');
-        $this->app->booting(function()
-        {
-            $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-            $loader->alias('OvhSwiftLaravel', 'Wooxo\OvhSwiftLaravel\OvhSwiftLaravel');
-        });
+		$configPath = __DIR__ . '/../config/ovh-swift-laravel.php';
+		if (function_exists('config_path')) {
+			$publishPath = config_path('ovh-swift-laravel.php');
+		} else {
+			$publishPath = base_path('config/ovh-swift-laravel.php');
+		}
+		$this->publishes([$configPath => $publishPath], 'config');
     }
 
 	/**
@@ -34,6 +35,8 @@ class OvhSwiftLaravelServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+        $configPath = __DIR__ . '/../config/ovh-swift-laravel.php';
+        $this->mergeConfigFrom($configPath, 'ovh-swift-laravel');
 	}
 
 	/**
