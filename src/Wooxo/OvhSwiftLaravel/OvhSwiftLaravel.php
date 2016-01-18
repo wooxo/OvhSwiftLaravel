@@ -1,7 +1,6 @@
 <?php
 namespace Wooxo\OvhSwiftLaravel;
 use OpenCloud\OpenStack;
-use Guzzle\Http\Exception\BadResponseException;
 use Illuminate\Support\Facades\Config;
 
 /**
@@ -39,9 +38,9 @@ class OvhSwiftLaravel {
      */
     public function __construct(){
         $this->client = new OpenStack($this->url, array(
-            'username' => Config::get('ovh-swift-laravel::config.username'),
-            'password' => Config::get('ovh-swift-laravel::config.password'),
-            'tenantId' => Config::get('ovh-swift-laravel::config.tenantId'),
+            'username' => Config::get('ovh-swift-laravel.config.username'),
+            'password' => Config::get('ovh-swift-laravel.config.password'),
+            'tenantId' => Config::get('ovh-swift-laravel.config.tenantId'),
         ));
         $cacheFile = storage_path() . '/.opencloud_token';
         // If the cache file exists, try importing it into the client
