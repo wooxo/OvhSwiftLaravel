@@ -1,7 +1,7 @@
 {
     "name": "wooxo/ovh-swift-laravel",
     "type": "library",
-    "description": "Library to use OVH PCI Object Storage API with Laravel 4.2.",
+    "description": "Library to use OVH PCI Object Storage API with Laravel.",
     "authors": [
         {
             "name": "Wooxo SA",
