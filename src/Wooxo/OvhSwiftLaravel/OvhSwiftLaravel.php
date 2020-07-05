@@ -13,7 +13,7 @@ class OvhSwiftLaravel {
      * URL of OVH PCI Endpoint
      * @var string
      */
-    private $url = 'https://auth.cloud.ovh.net/v2.0';
+    private $url = 'https://auth.cloud.ovh.net/v3.0';
 
     /**
      * OpenStack Connection Entity
