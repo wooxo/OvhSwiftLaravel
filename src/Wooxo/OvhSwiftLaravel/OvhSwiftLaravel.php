@@ -1,6 +1,7 @@
 <?php
 namespace Wooxo\OvhSwiftLaravel;
-use OpenCloud\OpenStack;
+use OpenStack\OpenStack;
+use GuzzleHttp\Psr7\Stream;
 use Guzzle\Http\Exception\BadResponseException;
 use Illuminate\Support\Facades\Config;
 
@@ -14,7 +15,7 @@ class OvhSwiftLaravel {
      * URL of OVH PCI Endpoint
      * @var string
      */
-    private $url = 'https://auth.cloud.ovh.net/v2.0';
+    private $url = 'https://auth.cloud.ovh.net/v3/';
 
     /**
      * OpenStack Connection Entity
@@ -38,27 +39,20 @@ class OvhSwiftLaravel {
      * Constructor
      */
     public function __construct(){
-        $this->client = new OpenStack($this->url, array(
-            'username' => Config::get('ovh-swift-laravel::config.username'),
-            'password' => Config::get('ovh-swift-laravel::config.password'),
-            'tenantId' => Config::get('ovh-swift-laravel::config.tenantId'),
-        ));
-        $cacheFile = storage_path() . '/.opencloud_token';
-        // If the cache file exists, try importing it into the client
-        if (file_exists($cacheFile)) {
-            $data = unserialize(file_get_contents($cacheFile));
-            $this->client->importCredentials($data);
-        }
-        $token = $this->client->getTokenObject();
-        // If no token exists, or the current token is expired, re-authenticate and save the new token to disk
-        if (!$token || ($token && $token->hasExpired())) {
-            $this->client->authenticate();
-            file_put_contents($cacheFile, serialize($this->client->exportCredentials()));
-        }
-        $this->service = $this->client->objectStoreService('swift', Config::get('ovh-swift-laravel::config.region'), 'publicURL');
+        $params = [
+            'authUrl' => $this->url,
+            'region'  => Config::get('ovh-swift-laravel::config.region'),
+            'user'    => [
+                'name' => Config::get('ovh-swift-laravel::config.username'),
+                'domain'   => [ 'id' => Config::get('ovh-swift-laravel::config.domainId') ],
+                'password' => Config::get('ovh-swift-laravel::config.password'),
+            ]
+        ];
+        $this->client = new OpenStack($params);
+        $identity = $this->client->identityV3();
+        $this->service = $this->client->ObjectStoreV1();
         $this->container = $this->service->getContainer(Config::get('ovh-swift-laravel::config.container'));
     }
-
 
     /**
      * Get a file
@@ -69,6 +63,7 @@ class OvhSwiftLaravel {
     public function fileGet($filename)
     {
         $object = $this->container->getObject($filename);
+        $object->retrieve();
         return $object;
     }
 
@@ -84,23 +79,26 @@ class OvhSwiftLaravel {
         $getPath = null;
         $isString = is_string($file);
 
-        if($isString){
+        if($isString)
             $getPath = $file;
-
-        }else{
+        else
             $getPath = $file->getRealPath();
-        }
 
-        if($filename == null){
-            if($isString){
-                $explodePath = explode("/", $file);
+        if($filename == null) {
+            if($isString) {
+                $explodePath = explode('/', $file);
                 $filename = $explodePath[count($explodePath)-1];
-            }else{
-                $filename = $file->getClientOriginalName();
             }
+            else
+                $filename = $file->getClientOriginalName();
         }
 
-        return $this->container->uploadObject($filename, fopen($getPath, 'r'));
+        $options = [
+            'name'   => $filename,
+            'stream' => new Stream(fopen($getPath, 'r')),
+        ];
+
+        return $this->container->createObject($options) != null;
     }
 
     /**
@@ -110,12 +108,7 @@ class OvhSwiftLaravel {
      * @return bool
      */
     public function fileExists($filename){
-        foreach($this->container->objectList() as $obj){
-            if($obj->getName() == $filename){
-                return true;
-            }
-        }
-        return false;
+        return $this->container->objectExists($filename);
     }
 
     /**
@@ -123,7 +116,7 @@ class OvhSwiftLaravel {
      * @return \OpenCloud\Common\Collection
      */
     public function fileList(){
-        return $this->container->objectList();
+        return $this->container->listObjects();
     }
 
     /**
@@ -133,6 +126,7 @@ class OvhSwiftLaravel {
      */
     public function fileDelete($filename){
         $object = $this->container->getObject($filename);
-        return $object->delete();
+        $object->delete();
+        return !$this->fileExists($filename);
     }
 }
