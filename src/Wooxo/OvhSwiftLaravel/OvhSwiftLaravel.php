@@ -98,7 +98,9 @@ class OvhSwiftLaravel {
             'stream' => new Stream(fopen($getPath, 'r')),
         ];
 
-        return $this->container->createObject($options) != null;
+        //on cree
+        $this->container->createObject($options) != null;
+        return $this->fileExists($filename); 
     }
 
     /**
