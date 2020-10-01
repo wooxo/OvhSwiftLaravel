@@ -69,7 +69,6 @@ class OvhSwiftLaravel {
 
         //Si le token n'existait pas ou expiré on le genere
         if(!file_exists($cacheFile)) {
-             echo "on passe par là";
              $identity = $this->client->identityV3();
              $thetoken = $identity->generateToken($params);
              //On le sauvegarde
