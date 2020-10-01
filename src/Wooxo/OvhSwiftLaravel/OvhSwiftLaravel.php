@@ -39,7 +39,7 @@ class OvhSwiftLaravel {
      * Constructor
      */
     public function __construct(){
-        $params = [
+                $params = [
             'authUrl' => $this->url,
             'region'  => Config::get('ovh-swift-laravel::config.region'),
             'user'    => [
@@ -48,8 +48,33 @@ class OvhSwiftLaravel {
                 'password' => Config::get('ovh-swift-laravel::config.password'),
             ]
         ];
+        //Cache file path        
+        $cacheFile = storage_path() . '/.opencloud_token';
+        //de basse on part en password
+        $params['methods'] = ['password'];
+        //Si le token existe 
+        if(file_exists($cacheFile)) {
+            $token = json_decode(file_get_contents($cacheFile));
+            //on verifie s'il est expiré ou pas
+            if ((new \DateTimeImmutable($token->expires->date)) > (new \DateTimeImmutable('now'))) {
+                $params['tokenId'] = $token->id;
+                $params['methods'] = ['token'];
+            } else {
+                // s'il est expiré on le detruit
+                unlink($cacheFile);
+            }
+        }
+        //On se connecte
         $this->client = new OpenStack($params);
-        $identity = $this->client->identityV3();
+
+        //Si le token n'existait pas ou expiré on le genere
+        if(!file_exists($cacheFile)) {
+             $identity = $this->client->identityV3();
+             $thetoken = $identity->generateToken($params);
+             //On le sauvegarde
+             file_put_contents($cacheFile, json_encode($thetoken));
+        }
+
         $this->service = $this->client->ObjectStoreV1();
         $this->container = $this->service->getContainer(Config::get('ovh-swift-laravel::config.container'));
     }
