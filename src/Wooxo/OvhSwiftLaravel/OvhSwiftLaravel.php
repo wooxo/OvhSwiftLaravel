@@ -39,9 +39,10 @@ class OvhSwiftLaravel {
      * Constructor
      */
     public function __construct(){
-                $params = [
+        $params = [
             'authUrl' => $this->url,
             'region'  => Config::get('ovh-swift-laravel::config.region'),
+            'methods' => ['password'],
             'user'    => [
                 'name' => Config::get('ovh-swift-laravel::config.username'),
                 'domain'   => [ 'id' => Config::get('ovh-swift-laravel::config.domainId') ],
@@ -50,8 +51,6 @@ class OvhSwiftLaravel {
         ];
         //Cache file path        
         $cacheFile = storage_path() . '/.opencloud_token';
-        //de basse on part en password
-        $params['methods'] = ['password'];
         //Si le token existe 
         if(file_exists($cacheFile)) {
             $token = json_decode(file_get_contents($cacheFile));
@@ -59,6 +58,7 @@ class OvhSwiftLaravel {
             if ((new \DateTimeImmutable($token->expires->date)) > (new \DateTimeImmutable('now'))) {
                 $params['tokenId'] = $token->id;
                 $params['methods'] = ['token'];
+                unset($params['user']);
             } else {
                 // s'il est expiré on le detruit
                 unlink($cacheFile);
@@ -74,7 +74,6 @@ class OvhSwiftLaravel {
              //On le sauvegarde
              file_put_contents($cacheFile, json_encode($thetoken));
         }
-
         $this->service = $this->client->ObjectStoreV1();
         $this->container = $this->service->getContainer(Config::get('ovh-swift-laravel::config.container'));
     }
